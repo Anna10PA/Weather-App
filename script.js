@@ -42,7 +42,6 @@ let getWeather = () => {
                     return valu.json()
                 })
                 .then((valu) => {
-                    console.log(valu.hourly)
                     history.push(city)
                     localStorage.setItem('history', JSON.stringify(history))
 
@@ -50,18 +49,12 @@ let getWeather = () => {
                     let time = valu.hourly.time
                     let temperature = valu.hourly.temperature_2m
 
-                    console.log(time)
-                    console.log(temperature)
-
                     // saatis gamotvla 
                     let curentDate = new Date()
                     let curentTime = `${curentDate.getFullYear()}-${String(curentDate.getMonth() + 1).length === 2 ? curentDate.getMonth() + 1 : '0' + Number(curentDate.getMonth() + 1)}-${curentDate.getDate()}T${String(curentDate.getHours()).length === 2 ? curentDate.getHours() : '0' + Number(curentDate.getHours())}:${curentDate.getMinutes() > 0 ? '00' : '0' + curentDate.getMinutes()}`
 
-                    console.log(time.indexOf(curentTime))
-
                     // saatis indeqsit temperaturis siashi indexit modzebna
                     let index = time.indexOf(curentTime)
-                    console.log(temperature[index])
 
                     // take value
                     let name = info[0].name
@@ -177,7 +170,6 @@ let getWeather = () => {
 
 
                     // sxva variantebi dziebis shedegad
-                    console.log(history)
                     sugdivs.innerHTML = ''
 
                     for (let item = 0; item < info.length; item++) {
@@ -235,20 +227,5 @@ document.addEventListener('keypress', (e) => {
     }
 })
 
-
-// let isOpen = false
-// let open = () => {
-//     isOpen = !isOpen
-
-//     if (isOpen) {
-//         blur.style.zIndex = '2'
-//         blur.style.display = 'flex'
-//         console.log(cityInput)
-//     } else {
-//         blur.style.zIndex = '-2'
-//         blur.style.display = 'none'
-//     }
-// }
-// searchIcon.addEventListener('click', open)
 
 getWeather()
